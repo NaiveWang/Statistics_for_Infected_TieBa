@@ -32,13 +32,19 @@ while 1:
     s = bytes.decode(html)
     #print(s.__len__())
     if(s.find(warn)==-1):
-        print("此吧健在")
+        print("此吧健在\n")
         if s.find('苟')!=-1:
             print("+++监测到有人在念诗")
         if s.find('吼啊')!=-1:
             print("+++监测到有人在大吼")
+        if s.find('蛤')!=-1:
+            print("+++监测到有人在召唤长者")
+        if s.find('naive')!=-1:
+            print("+++监测到有人在批判")
+        if s.find('给我搞')!=-1:
+            print("+++监测到有人正在赛艇")
     else:
-        print("此吧已经被续")
+        print("此吧已经被续\n")
         c.execute("INSERT INTO blocked VALUES(\'"+parse.unquote(name)+"\',CURRENT_TIMESTAMP)")
         conn.commit()
     conn.close()
