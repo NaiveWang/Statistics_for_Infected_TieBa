@@ -27,6 +27,8 @@ while 1:
     if(s.find(warn)==-1):
         print("此吧健在")
         if s.find('苟')!=-1:
-            print("监测到此吧有人在念诗")
+            print("+++监测到有人在念诗")
+        if s.find('吼啊')!=-1:
+            print("+++监测到有人在大吼")
     else:
         print("此吧已经被续")
