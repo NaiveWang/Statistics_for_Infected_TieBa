@@ -15,6 +15,7 @@ while 1:
 
     url0.encode("GB2312")
     response = request.urlopen(url0)
+    #print(response.code)
 
 
 
@@ -22,10 +23,13 @@ while 1:
 
 
     html = response.read()
-    #print(html)
-    warn = '抱歉，根据相'
+
+    warn = '抱歉，根据相关法律'
     s = bytes.decode(html)
+    #print(s.__len__())
     if(s.find(warn)==-1):
         print("此吧健在")
+        if s.find('苟')!=-1:
+            print("监测到此吧有人在膜")
     else:
         print("此吧已经被续")
