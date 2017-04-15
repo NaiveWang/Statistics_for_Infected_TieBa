@@ -1,4 +1,4 @@
-
+import sqlite3
 from urllib import request
 from urllib import parse
 
@@ -8,8 +8,15 @@ url2 = u'http://tieba.baidu.com/glgjssy'
 #name.encode("gbk")
 
 while 1:
+    conn = sqlite3.connect('tieba.db3')
+    c=conn.cursor()
     url0 = 'http://tieba.baidu.com/'
     name = input()
+    c.execute("SELECT * FROM blocked WHERE name=\'"+name+"\'")
+    if c.fetchone()!=None:
+        print("数据库显示此吧已经被续")
+        continue
+
     name = parse.quote(name)
     url0 = url0+name
 
@@ -32,3 +39,6 @@ while 1:
             print("+++监测到有人在大吼")
     else:
         print("此吧已经被续")
+        c.execute("INSERT INTO blocked VALUES(\'"+parse.unquote(name)+"\',CURRENT_TIMESTAMP)")
+        conn.commit()
+    conn.close()
