@@ -18,6 +18,10 @@ while 1:
         for row in c.execute("SELECT *FROM infected WHERE name=\'"+name+"\'"):
             print("#---数据库显示此吧已列入感染名单，匹配度为："+row[1].__str__())
         continue
+    c.execute("SELECT * FROM normal WHERE name=\'" + name + "\'")
+    if c.fetchone() != None:
+        print("#---数据库显示此吧在上次发现时正常")
+        continue
     name = parse.quote(name)
     url0 = url0+name
 
@@ -67,6 +71,9 @@ while 1:
         print("")
         if(ct>0):
             c.execute("INSERT INTO infected VALUES(\'"+parse.unquote(name)+"\',"+ct.__str__()+",CURRENT_TIMESTAMP)")
+            conn.commit()
+        else:
+            c.execute("INSERT INTO normal VALUES(\'" + parse.unquote(name) + "\',CURRENT_TIMESTAMP)")
             conn.commit()
     else:
         print("O---此吧已经被续\n")

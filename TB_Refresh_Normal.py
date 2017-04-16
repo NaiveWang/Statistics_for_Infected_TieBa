@@ -7,8 +7,7 @@ warn = '<h2 class=\"icon-attention\">抱歉'
 conn = sqlite3.connect('tieba.db3')
 c=conn.cursor()
 
-for row in c.execute("SELECT *FROM infected"):
-    level = row[1]
+for row in c.execute("SELECT *FROM normal"):
     url0 = 'http://tieba.baidu.com/'+parse.quote(row[0])
     name = row[0]
     url0.encode("GB2312")
@@ -16,7 +15,7 @@ for row in c.execute("SELECT *FROM infected"):
     html = response.read()
     s = bytes.decode(html)
     if(s.find(warn)==-1):
-        print("O---此吧健在。")
+        print(name+"吧健在。")
         ct = 0
         if s.find('关于撤销')!=-1:
             if s.find('吧主权限')!=-1:
@@ -40,14 +39,12 @@ for row in c.execute("SELECT *FROM infected"):
             print("++++监测到有人正在赛艇")
             ct+=50
         print("O----此吧被感染程度（估）："+ct.__str__())
-        print("")
-        if(ct==0):
-            print(name+"吧可能被清场")
-            c.execute("DELETE FORM infected WHERE name='",name,"\'")
+
+        if(ct>0):
+            print(name+"吧被感染")
+            c.execute("INSERT INTO infected VALUES(\'" + name + "\',"+ct.__str__()+",CURRENT_TIMESTAMP)")
             conn.commit()
-        elif(ct!=level):
-            print(name+"吧感染度有变更")
-            c.execute("UPDATE infected SET matched="+level.__str__()+" WHERE name='"+name+"\'")
+            c.execute("DELETE FROM normal WHERE name='" + name + "\'")
             conn.commit()
         else:
             print(name+"吧还是这么个熊样")
@@ -55,6 +52,7 @@ for row in c.execute("SELECT *FROM infected"):
         print("O---此吧已经被续\n")
         c.execute("INSERT INTO blocked VALUES(\'"+name+"\',CURRENT_TIMESTAMP)")
         conn.commit()
-        c.execute("DELETE FROM infected WHERE name='"+name+"\'")
+        c.execute("DELETE FROM normal WHERE name='"+name+"\'")
         conn.commit()
+    print("")
 conn.close()
