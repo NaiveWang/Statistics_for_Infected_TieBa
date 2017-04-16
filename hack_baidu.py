@@ -1,9 +1,10 @@
 import sqlite3
+import socket
 from urllib import request
 from urllib import parse
 import traceback
 #name.encode("gbk")
-
+socket.setdefaulttimeout(15)
 while 1:
     conn = sqlite3.connect('tieba.db3')
     c=conn.cursor()
@@ -32,7 +33,11 @@ while 1:
 
     print("O--数据库空，正在抓取此吧")
 
-    html = response.read()
+    try:
+        html = response.read()
+    except Exception as e:
+        print("访问超时")
+        continue
     #print(len(html))
 
     warn = '<h2 class=\"icon-attention\">抱歉'
