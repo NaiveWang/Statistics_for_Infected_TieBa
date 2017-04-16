@@ -1,10 +1,7 @@
 import sqlite3
 from urllib import request
 from urllib import parse
-
-
-url1 = u'http://tieba.baidu.com/%E6%B1%9F%E5%93%A5%E5%AE%8B%E5%A6%B9'
-url2 = u'http://tieba.baidu.com/glgjssy'
+import traceback
 #name.encode("gbk")
 
 while 1:
@@ -29,11 +26,17 @@ while 1:
     #print(response.code)
 
 
-    print("正在抓取网页")
+    print("数据库空，正在抓取此吧")
+
     html = response.read()
+    #print(len(html))
 
     warn = '<h2 class=\"icon-attention\">抱歉'
-    s = bytes.decode(html)
+    try:
+        s = bytes.decode(html)
+    except Exception as e:
+        print("暂无此吧")
+        continue
 
     #print(s.__len__())
     if(s.find(warn)==-1):
@@ -60,6 +63,7 @@ while 1:
         if s.find('给我搞')!=-1:
             print("+++监测到有人正在赛艇")
             ct+=50
+        print("此吧被感染程度（估）："+ct.__str__())
         print("")
         if(ct>0):
             c.execute("INSERT INTO infected VALUES(\'"+parse.unquote(name)+"\',"+ct.__str__()+",CURRENT_TIMESTAMP)")
