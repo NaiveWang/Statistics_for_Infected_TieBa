@@ -1,3 +1,5 @@
+import codecs
+
 def gen(n,m,phase,s):
     if n==m:
         print(s)
@@ -9,7 +11,7 @@ def gen(n,m,phase,s):
 
 
 
-f = open('moha.psr')
+f = codecs.open('moha.psr','r','utf-8')
 text = f.read()
 
 line = text.split('\n')
