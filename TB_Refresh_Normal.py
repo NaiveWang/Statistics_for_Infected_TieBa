@@ -44,7 +44,7 @@ for row in c.execute("SELECT *FROM normal"):
             print(name+"吧被感染")
             c.execute("INSERT INTO infected VALUES(\'" + name + "\',"+ct.__str__()+",CURRENT_TIMESTAMP)")
             conn.commit()
-            c.execute("DELETE FROM normal WHERE name='" + name + "\'")
+            c.execute("DELETE FROM normal WHERE name=\'" + name + "\'")
             conn.commit()
         else:
             print(name+"吧还是这么个熊样")
@@ -52,7 +52,7 @@ for row in c.execute("SELECT *FROM normal"):
         print("O---此吧已经被续\n")
         c.execute("INSERT INTO blocked VALUES(\'"+name+"\',CURRENT_TIMESTAMP)")
         conn.commit()
-        c.execute("DELETE FROM normal WHERE name='"+name+"\'")
+        c.execute("DELETE FROM normal WHERE name=\'"+name+"\'")
         conn.commit()
     print("")
 conn.close()

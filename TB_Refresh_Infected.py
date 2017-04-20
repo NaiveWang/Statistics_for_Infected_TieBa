@@ -43,7 +43,7 @@ for row in c.execute("SELECT *FROM infected"):
 
         if(ct==0):
             print(name+"吧可能被清场")
-            c.execute("DELETE FORM infected WHERE name='",name,"\'")
+            c.execute("DELETE FROM infected WHERE name=\'"+name+"\'")
             conn.commit()
             c.execute("INSERT INTO normal VALUES(\'"+name+"\',CURRENT_TIMESTAMP)")
             conn.commit()
@@ -57,7 +57,7 @@ for row in c.execute("SELECT *FROM infected"):
         print("O---此吧已经被续\n")
         c.execute("INSERT INTO blocked VALUES(\'"+name+"\',CURRENT_TIMESTAMP)")
         conn.commit()
-        c.execute("DELETE FROM infected WHERE name='"+name+"\'")
+        c.execute("DELETE FROM infected WHERE name=\'"+name+"\'")
         conn.commit()
     print("")
 conn.close()
