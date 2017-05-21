@@ -52,7 +52,7 @@ while 1:
         print("O---此吧健在。")
         ct = 0
         if s.find('关于撤销')!=-1:
-            if s.find('吧主权限')!=-1:
+            if s.find('吧主管理权限')!=-1:
                 print("++++++监测到此吧吧主被撤销")
                 ct+=1
         if s.find('苟')!=-1:
