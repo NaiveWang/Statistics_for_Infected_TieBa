@@ -49,6 +49,9 @@ while 1:
 
     #print(s.__len__())
     if(s.find(warn)==-1):
+        s=s.split("class=\"content\"")
+        del s[0]
+        s=s[0]
         print("O---此吧健在。")
         ct = 0
         if s.find('关于撤销')!=-1:

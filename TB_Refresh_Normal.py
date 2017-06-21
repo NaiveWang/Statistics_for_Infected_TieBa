@@ -14,6 +14,9 @@ for row in c.execute("SELECT *FROM normal"):
     response = request.urlopen(url0)
     html = response.read()
     s = bytes.decode(html)
+    s=s.split("class=\"content\"")
+    del(s[0])
+    s=s[0]
     if(s.find(warn)==-1):
         print(name+"吧健在。")
         ct = 0
