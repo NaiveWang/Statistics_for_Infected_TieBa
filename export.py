@@ -5,3 +5,8 @@ c=conn.cursor()
 o=open('blocked.txt','w')
 for row in c.execute('SELECT * FROM blocked'):
     o.writelines(row[0]+'\n')
+o.close()
+o=open('infected.txt','w')
+for row in c.execute('SELECT * FROM infected'):
+    o.writelines(row[0]+'\n')
+o.close()
