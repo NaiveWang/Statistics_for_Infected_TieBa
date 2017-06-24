@@ -1,0 +1,23 @@
+from tkinter import *
+def fb1(event):
+    print('+1S')
+root = Tk()
+l1 = Label(root,text='first frame',fg='gray',bg='yellow')
+l1.pack(fill=X)
+l2 = Label(root,text='苟',fg='white',bg='black')
+l2.pack(fill=Y)
+f1 = Frame(root)
+f1.pack(side=BOTTOM)
+b1 = Button(f1,text='B1',fg='red')
+b1.bind('<Button-1>',fb1)
+b2 = Button(f1,text='B2',fg='green')
+b3 = Button(f1,text='B3',fg='blue')
+b4 = Button(f1,text='B4',fg='black')
+b1.pack(side=LEFT,fill=Y)
+b2.pack(side=LEFT,fill=Y)
+b3.pack(side=RIGHT,fill=Y)
+b4.pack(side=RIGHT,fill=Y)
+e = Entry(root)
+e.pack()
+root.mainloop()
+
