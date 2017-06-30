@@ -1,5 +1,5 @@
 # 被续贴吧统计器
-Note: This project is just for fun in China mainland.
+Note: This project is just for kicking ass in China mainland.
 
 用来统计、识别被续的贴吧
 ## 简单描述
