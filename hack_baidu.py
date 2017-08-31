@@ -40,7 +40,7 @@ while 1:
         continue
     #print(len(html))
 
-    warn = '<h2 class=\"icon-attention\">抱歉'
+    warn = 'h2 class=\"icon-attention\">抱歉'
     try:
         s = bytes.decode(html)
     except Exception as e:
